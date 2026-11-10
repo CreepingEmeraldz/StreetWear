@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+* {
+  font-family: nunito;
+}
+
+html, body {
+    background: #0a0826;
+    margin: 0;
+    color: #a6a0fa;
+}
+
+#nav {
+  text-align: center;
+  background: rgba(10, 8, 38, 0.5);
+  border-bottom: 1px solid #2A2950;
+  padding: 0;
+}
+#brand-name {
+  margin: 0;
+  font-size: 48px;
+}
+#logo{
+  height: 56px;
+  float: left;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+#image {
+  height: 480px;
+}
+.carousel {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  align-items: center; 
+  padding-block: 48px;  
+}
+.carousel-slide {
+  scroll-snap-align: center;
+  animation: slide; 
+  position: relative; 
+  
+}
+
+@supports (animation-timeline: view()) {
+  .carousel-slide {
+    animation: focus linear both;
+    animation-timeline: view(inline);
+  }
+}
+
+@keyframes focus {
+0%, 25% {
+  transform: scale(0.55);
+  opacity: 0.6;
+  z-index: 0;
+  animation-timing-function: ease-in-out;
+}
+50% {
+  transform: scale(1.15);
+  opacity: 1;
+  z-index: 1;
+  animation-timing-function: ease-in-out;
+}
+75%, 100% {
+  transform: scale(0.55);
+  opacity: 0.6;
+  z-index: 0;
+}

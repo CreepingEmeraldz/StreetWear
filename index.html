@@ -1,0 +1,96 @@
+<!DOCTYPEHTML>
+<html>
+<head>
+  <title>Street Wear</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div id="nav">
+    <img src="Media/logo.png" id="logo"></img>
+    <p id="brand-name">Street Wear</p>
+  </div>
+  <main class="carousel">
+    <div class="carousel-slide">
+        <img src="Media/IMAGE1.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE2.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE3.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE4.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE5.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE6.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE7.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE8.png" id="image"></img>
+    </div>
+    <div class="carousel-slide">
+        <img src="Media/IMAGE9.png" id="image"></img>
+    </div>
+  </main>
+  <div id="mission">
+    <p>spreading graffity through streetwear and expressing it's significance, and how underated it is</p>
+  </div>
+<script>
+  const carousel = document.querySelector('.carousel');
+  const SPEED = 4;     
+  const IDLE_DELAY = 250;  
+  let userActive = false;
+  let idleTimer;
+  let setWidth = 0;   
+  let pos = 0;   
+  const originals = [...carousel.children];
+  
+  for (let i = 0; i < 2; i++) {
+    originals.forEach(slide => carousel.appendChild(slide.cloneNode(true)));
+  }
+
+  function measure() {
+    setWidth = carousel.scrollWidth / 3;
+    if (carousel.scrollLeft === 0) carousel.scrollLeft = setWidth; 
+    pos = carousel.scrollLeft;
+  }
+  window.addEventListener('load', measure);  
+  window.addEventListener('resize', measure);
+
+  carousel.addEventListener('scroll', () => {
+    if (!setWidth) return;
+    if (carousel.scrollLeft >= setWidth * 2) carousel.scrollLeft -= setWidth;
+    else if (carousel.scrollLeft < setWidth) carousel.scrollLeft += setWidth;
+  });
+
+  function loop() {
+    if (!userActive && setWidth) {
+      pos += SPEED;
+      if (pos >= setWidth * 2) pos -= setWidth;
+      carousel.scrollLeft = pos;
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function userInteracted() {
+    userActive = true;
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      pos = carousel.scrollLeft;
+      userActive = false;
+    }, IDLE_DELAY);
+  }
+
+  ['pointerdown', 'wheel'].forEach(evt => carousel.addEventListener(evt, userInteracted, { 
+    passive: true 
+  }));
+  requestAnimationFrame(loop);
+</script>
+</body>  
+</html>
