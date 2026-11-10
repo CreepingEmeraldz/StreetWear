@@ -1,2 +1,2 @@
-# INK-INTENTION
-The website for Ink n' Intention.
+# StreetWear
+The website for StreetWear.
