@@ -1,4 +1,4 @@
-<!DOCTYPEHTML>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Street Wear</title>
@@ -6,91 +6,61 @@
 </head>
 <body>
   <div id="nav">
-    <img src="Media/logo.png" id="logo"></img>
-    <p id="brand-name">Street Wear</p>
+    <p id="brand-name">STREET WEAR</p>
+    <button style="background:#1d2a21; float: right; margin-top: -36px; margin-right: 18px;" id="order">Order a custom shirt</button>
   </div>
-  <main class="carousel">
-    <div class="carousel-slide">
-        <img src="Media/IMAGE1.png" id="image"></img>
+  <h1>STREET</h1>
+  <h1 id="lower">WEAR</h1>
+  <p id="message">Custom shirts, unleash your creativity.</p>
+  <button style="background:#4B5E50; margin-left:40px;"id="create">Create your own design</button>
+  <div style="top: 20%; right: 4%; position: absolute;" id="image1">
+    <img style="height:520px;"src="Media/IMAGE1.png"></img>
+  </div>
+  <div id="banner">
+    <p>CUSTOM SHIRTS / HIGH QUALITY / GRAFFITI DESIGN / CUSTOM SHIRTS / HIGH QUALITY / GRAFFITI DESIGN / CUSTOM SHIRTS / HIGH QUALITY / GRAFFITI DESIGN / CUSTOM SHIRTS / HIGH QUALITY / GRAFFITI DESIGN /</p>
+  </div>
+  <div id="row1">
+    <div id="image1">
+      <img style="height:400px;"src="Media/IMAGE1.png"></img>
+      <p style="left: 0px;" id="name">[NAME]</p>
+      <p style="right: 0px;" id="price">[PRICE]</p>
     </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE2.png" id="image"></img>
+    <div id="image2">
+      <img style="height:400px;"src="Media/IMAGE2.png"></img>
+      <p style="left: 0px;" id="name">[NAME]</p>
+      <p style="right: 0px;" id="price">[PRICE]</p>
     </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE3.png" id="image"></img>
+    <div id="image3">
+      <img style="height:400px;"src="Media/IMAGE3.png"></img>
+      <p style="left: 0px;" id="name">[NAME]</p>
+      <p style="right: 0px;" id="price">[PRICE]</p>
     </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE4.png" id="image"></img>
+  </div>
+  <div style="margin-top: 80px; margin-bottom: 140px;" id="row2">
+    <div id="image4">
+      <img style="height:400px;"src="Media/IMAGE4.png"></img>
+      <p style="left: 0px;" id="name">[NAME]</p>
+      <p style="right: 0px;" id="price">[PRICE]</p>
     </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE5.png" id="image"></img>
+    <div id="image1">
+      <img style="height:400px;"src="Media/IMAGE5.png"></img>
+      <p style="left: 0px;" id="name">[NAME]</p>
+      <p style="right: 0px;" id="price">[PRICE]</p>
     </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE6.png" id="image"></img>
+    <div id="image2">
+      <img style="height:400px;"src="Media/IMAGE6.png"></img>
+      <p style="left: 0px;" id="name">[NAME]</p>
+      <p style="right: 0px;" id="price">[PRICE]</p>
     </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE7.png" id="image"></img>
+  </div>
+  <div id="end">
+    <div style="width: 50%; margin-left: auto; margin-right: auto; padding-top: 90px;">
+      <h1 style="font-size: 86px; color: #def4dc;">NOT YOUR AVERAGE ARTIST</h1>
+      <h1 style="font-size: 86px; color: #def4dc; margin-left: 10%; margin-top: -40px;">NOT YOUR AVERAGE TEE.</h1>
+      <button style="background: #e9d8a6; color: #1d2a21; margin-left: 36%; margin-bottom: 60px;">Order a custom shirt</button>
     </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE8.png" id="image"></img>
-    </div>
-    <div class="carousel-slide">
-        <img src="Media/IMAGE9.png" id="image"></img>
-    </div>
-  </main>
-  <div id="mission">
-    <p>spreading graffity through streetwear and expressing it's significance, and how underated it is</p>
   </div>
 <script>
-  const carousel = document.querySelector('.carousel');
-  const SPEED = 4;     
-  const IDLE_DELAY = 250;  
-  let userActive = false;
-  let idleTimer;
-  let setWidth = 0;   
-  let pos = 0;   
-  const originals = [...carousel.children];
-  
-  for (let i = 0; i < 2; i++) {
-    originals.forEach(slide => carousel.appendChild(slide.cloneNode(true)));
-  }
-
-  function measure() {
-    setWidth = carousel.scrollWidth / 3;
-    if (carousel.scrollLeft === 0) carousel.scrollLeft = setWidth; 
-    pos = carousel.scrollLeft;
-  }
-  window.addEventListener('load', measure);  
-  window.addEventListener('resize', measure);
-
-  carousel.addEventListener('scroll', () => {
-    if (!setWidth) return;
-    if (carousel.scrollLeft >= setWidth * 2) carousel.scrollLeft -= setWidth;
-    else if (carousel.scrollLeft < setWidth) carousel.scrollLeft += setWidth;
-  });
-
-  function loop() {
-    if (!userActive && setWidth) {
-      pos += SPEED;
-      if (pos >= setWidth * 2) pos -= setWidth;
-      carousel.scrollLeft = pos;
-    }
-    requestAnimationFrame(loop);
-  }
-
-  function userInteracted() {
-    userActive = true;
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-      pos = carousel.scrollLeft;
-      userActive = false;
-    }, IDLE_DELAY);
-  }
-
-  ['pointerdown', 'wheel'].forEach(evt => carousel.addEventListener(evt, userInteracted, { 
-    passive: true 
-  }));
-  requestAnimationFrame(loop);
 </script>
 </body>  
 </html>
