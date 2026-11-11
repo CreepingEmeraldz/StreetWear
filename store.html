@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Street Wear - Store</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .card {
+      background: #4B5E50;
+      border-radius: 0.5vw;
+      padding: 2vw;
+      position: relative;
+      animation: entrance linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));   
+      gap: 3vw;
+      padding: 0 4vw;
+      margin-top: 2vw;
+    }
+    #categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1vw;
+      padding: 3vw 0 2vw; 
+      margin: 0 4vw;
+      align-self: center;
+      font-size: 1.6vw;
+      border-bottom: 0.15vw solid #1d2a21;
+    }
+    .cat {
+      background: transparent;
+      color: #1d2a21;
+      border: 0.15vw solid #1d2a21;
+      border-radius: 999px;
+      padding: 0.6vw 1.6vw;
+      font-size: max(14px, 1.1vw);
+      text-transform: capitalize;  
+    }
+    .cat.active {
+      background: #1d2a21;
+      color: #def4dc;
+    }
+    .tag {
+      background: #def4dc;
+      border-radius: 50px;
+      padding: 0.3vw 1vw; 
+      position: absolute;
+      top: 0.7vw;
+      left: 0.8vw;
+      text-transform: capitalize;
+      font-family: nunito;
+      font-weight: bold;
+      font-size: 1.06vw;
+    }
+  </style>
+</head>
+<body>
+  <div id="nav">
+    <p onclick="window.location.href='index.html'" id="brand-name">STREET WEAR</p>
+    <div style="display: flex; gap: 2.5vw; align-self: stretch;">
+      <button class="page" style="" onclick="window.location.href='store.html'" id="navbutton">Shop</button>
+      <button id="navbutton">Custom order</button>
+      <button id="navbutton">About</button>
+      <button id="navbutton">Contact Us</button>
+    </div>
+    <button style="background:#1d2a21;" id="order">Order a custom shirt</button>
+  </div>
+  <h1 style="font-size: 8vw; margin-top: -0.2vw; margin-left: 3.5vw; margin-bottom: -4vw;">SHOP</h1>
+  <div id="categories"></div>
+  <div id="grid"></div>
+<script>
+    const products = [
+      { category: "test", name: "Shirt", price: 123, image: "Media/IMAGE1.png" },
+      { category: "test", name: "Shirt", price: 123, image: "Media/IMAGE2.png" },  
+      { category: "test", name: "Shirt", price: 123, image: "Media/IMAGE3.png" },
+      { category: "test", name: "Shirt", price: 123, image: "Media/IMAGE4.png" },
+      { category: "best", name: "Shirt", price: 123, image: "Media/IMAGE5.png" },
+      { category: "best", name: "Shirt", price: 123, image: "Media/IMAGE6.png" },
+      { category: "best", name: "Shirt", price: 123, image: "Media/IMAGE7.png" },
+      { category: "best", name: "Shirt", price: 123, image: "Media/IMAGE8.png" },
+      { category: "lest", name: "Shirt", price: 123, image: "Media/IMAGE5.png" },
+      { category: "lest", name: "Shirt", price: 123, image: "Media/IMAGE6.png" },
+      { category: "lest", name: "Shirt", price: 123, image: "Media/IMAGE7.png" },
+      { category: "lest", name: "Shirt", price: 123, image: "Media/IMAGE8.png" },
+    ];
+    const grid = document.getElementById("grid");
+    const categories = ["all", ...new Set(products.map(p => p.category))];
+    function makeCard(p) {
+      const src = p.image ?? `Media/${p.id}.png`;
+      const tag = current === "all"
+        ? `<span class="tag">${p.category}</span>`
+        : "";                   
+      return `
+        <div class="card">
+          ${tag}
+          <img src="${src}" alt="${p.name}" loading="lazy">
+          <p style="left: 0px;" id="name">${p.name}</p>
+          <p style="right: 0px;" id="price">$${p.price}</p>
+        </div>`;
+    }
+    const bar  = document.getElementById("categories");
+    let current = "all";
+
+    function render() {
+      const shown = current === "all"
+        ? products
+        : products.filter(p => p.category === current);
+      grid.innerHTML = shown.map(makeCard).join("");
+
+      bar.innerHTML = categories.map(c => `
+        <button class="cat ${c === current ? "active" : ""}" data-cat="${c}">${c}</button>
+      `).join("");
+    }
+
+    bar.addEventListener("click", e => {
+      const btn = e.target.closest("button[data-cat]");
+      if (!btn) return;
+      current = btn.dataset.cat;
+      render();
+    });
+
+    render();
+</script>
+</body>  
+</html>
+
