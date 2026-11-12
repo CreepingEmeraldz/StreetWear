@@ -221,18 +221,6 @@ button:active {
   animation-timeline: view();
   animation-range: entry 0% entry 80%;
 }
-#image4{
-  background: #e9d8a6;
-  border-radius: 0.44vw;
-  padding: 1.77vw;
-  margin-right: auto;
-  margin-left: auto;
-  position: relative;
-  animation: entrance linear both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 80%;
-
-}
 #name, #price {
   position: absolute;
   bottom: -2.66vw;
